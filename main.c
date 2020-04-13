@@ -14,7 +14,7 @@ void save_file();
 
 int main(){
     int menu;
-	printf("fix something");
+	printf("something fixed");
     while(1){
         printf("\nMenu : 1.Create 2.Read 3.Update 4.Delete 5.Search 6.Search(name) 7.Rank 8.Sort 9.Load 10.Save 0.Exit > ");
         scanf("%d",&menu);
