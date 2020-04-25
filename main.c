@@ -1,5 +1,4 @@
 #include "track_record.h"
-#define DEBUG
 
 void create_record();
 void read_record();
@@ -14,7 +13,6 @@ void save_file();
 
 int main(){
     int menu;
-	printf("something fixed");
     while(1){
         printf("\nMenu : 1.Create 2.Read 3.Update 4.Delete 5.Search 6.Search(name) 7.Rank 8.Sort 9.Load 10.Save 0.Exit > ");
         scanf("%d",&menu);
@@ -79,10 +77,10 @@ void create_record(){
     printf("Track name > ");
     scanf("%s", t_name);
     printf("Date > ");
-    scanf("%d", &date);
+    scanf("%d", &date); //8월2일 같은 경우 0802 로 입력받는다. 
     printf("Kartbody name > ");
     scanf("%s", k_name);
-    printf("Track record > ");  //1분 32초 99 의 경우 13299로 입력받는다
+    printf("Track record > ");  //1'33'99 의 경우 13299로 입력받는다
     scanf("%d", &t_record);
     m_create(id, p_name, t_name, date, k_name, t_record);
     #ifdef DEBUG
@@ -186,11 +184,13 @@ void delete_record(){
 void rank_track(){
     Record* records[MAX_RECORDS];
     int size = m_count();
+    char t_name[20];
     printf("The ranking. \n");
+    printf("Input the name of track name that you want to watch rank> ");
+    scanf("%s",t_name);
     m_get_all(records);
-    m_rank(records);
+    size = m_rank(records,t_name);
 
-    printf("%d\n", size);
     
 
     for(int i=0; i<size; i++){

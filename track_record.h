@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_RECORDS 5      // 저장할 수 있는 트랙 레코드 최대 갯수
+#define MAX_RECORDS 50      // 저장할 수 있는 트랙 레코드 최대 갯수
 
 typedef struct record{
     char id[20];     //Record끼리 구별하기 위한 변수
@@ -27,5 +27,5 @@ char* m_to_string_save(Record* p);// 특정 트랙 레코드의 내용을 파일
 void m_delete(Record* p); //특정 트랙 레코드의 정보 제거
 void m_update(Record* p, char*p_n, char*t_n, int d, char*k, int t); // 특정 트랙 레코드의 정보를 업데이트
 void m_sort(Record* a[]);// 트랙 레코드를 시간 기록 기준으로 정렬함
-void m_rank(Record* a[]);// 트랙 레코드를 트랙 기준으로 정렬함
+int m_rank(Record* a[],char* t);// 트랙 레코드를 트랙 기준으로 정렬함
 

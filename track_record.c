@@ -61,7 +61,15 @@ void m_get_all(Record* a[]){
 
 char* m_to_string(Record* p){
     static char str[100];
-    sprintf(str, "[%s] %s / %s / %d / %s / %d", p->id, p->p_name, p->t_name, p->date, p->k_name, p->t_record);
+    int month, day;
+    month = p->date/100;
+    day = p->date - (month*100);
+    int minute, second, second2;
+    minute = p->t_record/10000;
+    second = (p->t_record - (minute * 10000)) / 100;
+    second2 = (p->t_record - (minute * 10000) - (second * 100));
+
+    sprintf(str, "[%s] %s / %s / %d/%d / %s / %d'%d'%d", p->id, p->p_name, p->t_name, month,day,p->k_name, minute, second, second2);
     return str;
 }
 
@@ -131,19 +139,29 @@ void m_update(Record* p, char*p_n, char*t_n, int d, char*k, int t){
 }
 
 
-void m_rank(Record* a[]){
+int m_rank(Record* a[], char * t){
     Record* dummy;
-    int i=0, j=0;
-    for(i=0;i<_count;i++){
-        for(j=0;j<_count -1; j++){
-            if(a[j]->t_record < a[j+1]->t_record){
+    int i=0, j=0, k=0, c=0;
+    
+    for(k=0; k<_count; k++){
+            if(records[k]!=NULL && (strcmp(records[k]->t_name, t)==0)){
+                a[c]=records[k];
+                c++;
+            }
+    }
+    for(i=0;i<c;i++){
+        for(j=0;j<c -1; j++){
+            if(a[j]->t_record > a[j+1]->t_record){
                 dummy = a[j];
                 a[j] = a[j+1];
                 a[j+1] = dummy;
             }
         }
     } 
+    return c;
 }
+
+
 
 
 void m_sort(Record* a[]){
